@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="kr">
+<% include ./partials/head.ejs %>
+
+<body>
+    <% include ./partials/header.ejs %>
+    <main role="main">
+        <% include ./partials/mainHeader.ejs %>
+        <div class="starter-template">
+            <div class="container text-left">
+                <h6>
+                    <%= single.boardName%>
+                </h6>
+                <h3>
+                    <%= single.title%>
+                </h3>
+            </div>
+            <div class="container text-left">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <%= single.createDate.substring(0,10)%>
+                        </h6>
+                        <p class="card-text">
+                            <%- single.content.replace(/\r\n/g, '<br/>')%>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container text-right" style="margin-top:10px">
+                <% if (single.userId === _g.session.userid) { %>
+                <a href="/board/update/<%=single.boardSeq%>" class="btn btn-primary">Update</a>
+                <a href="/board/delete/<%=single.boardSeq%>" class="btn btn-danger">Delete</a>
+                <% } %>
+                <a href="/board" class="btn btn-primary">List</a>
+            </div>
+        </div>
+    </main>
+    <% include ./partials/footer.ejs %>
+</body>
+
+</html>

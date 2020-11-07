@@ -1,0 +1,27 @@
+{
+  "name": "nodejs_client",
+  "version": "1.0.0",
+  "description": "mirboard nodejs client",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chokije",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bootstrap": "^4.0.0",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.2.1",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.15.1",
+    "querystring": "^0.2.0",
+    "request": "^2.85.0"
+  }
+}

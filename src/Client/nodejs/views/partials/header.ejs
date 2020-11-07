@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/">Home</a>
+    <span class="navbar-text ml-auto"><%=_g.session ? _g.session.userid : ''%></span>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <% if (_g.session) {%>
+            <a href="/user/logout" class="btn btn-danger btn-sm">Logout</a>
+            <%} else {%>
+            <a href='/user/login' class="btn btn-warning btn-sm">Login</a>
+            <a href='/user/register' class="btn btn-primary btn-sm">Sign up</a>
+            <%} %>
+        </li>
+    </ul>
+</nav>

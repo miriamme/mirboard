@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="kr">
+<% include ./partials/head.ejs %>
+
+<body>
+    <% include ./partials/header.ejs %>
+    <main role="main">
+        <% include ./partials/mainHeader.ejs %>
+        <div class="starter-template">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                    <div class="collapse navbar-collapse">
+                        <div class='text-left'>
+                            <a class="btn btn-outline-dark" href="/board/write" role="button">Write</a>
+                        </div>
+                    </div>
+                    <form class="form-inline my-2 my-lg-0" method="post" action="/board">
+                        <input class="form-control mr-sm-2" name="search" type="search" value="<%=typeof params === 'undefined' ? '' : params.keyword%>" placeholder="Title" />
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </nav>
+            </div>
+            <div class="container">
+                <table class="table table-hover table-sm">
+                    <caption>Searching Count :
+                        <%=totalCount%>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">NO</th>
+                            <th scope="col">카테고리</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">수정일</th>
+                            <th scope="col">작성일</th>
+                        </tr>
+                    </thead>
+                    <% for(var i=0; i<list.length; i++){ %>
+                    <tr>
+                        <th scope="row"><%=list[i].boardSeq%></td>
+                        <td><%=list[i].boardName%></td>
+                        <td class='text-left'><a href="/board/<%=list[i].boardSeq%>"><%=list[i].title%></a></td>
+                        <td><%=list[i].userId%></td>
+                        <td><%=(list[i].updateDate) ? list[i].updateDate.substring(0,10) : ''%></td>
+                        <td><%=list[i].createDate.substring(0,10)%></td>
+                    </tr>
+                    <% } %>
+                </table>
+            </div>
+            
+            <% include ./partials/paging.ejs %>
+        </div>
+    </main>
+    <% include ./partials/footer.ejs %>
+</body>
+</html>

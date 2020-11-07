@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kr">
+<% include ./partials/head.ejs %>
+
+<body>
+    <% include ./partials/header.ejs %>
+    <main role="main">
+        <% include ./partials/mainHeader.ejs %>
+        <div class="starter-template">
+            <div class="container text-left">
+                <form id="frm" method="post" action="/board/write">
+                    <input type="hidden" id="masterSeq" name="masterSeq" value="" />
+                    <div class="form-group">
+                        <label for="selMaster">게시판 종류</label>
+                        <select class="form-control" id="selMaster">
+                        <% for( var i=0; i<list.length; i++) {%>
+                            <option value="<%=list[i].masterSeq%>"><%=list[i].boardName%></option>
+                        <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ipTitle">제목</label>
+                        <input type="email" class="form-control" id="ipTitle" name="ipTitle" placeholder="제목을 입력하세요." />
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="txaContent" name="txaContent" rows="10"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="container text-right">
+                <button id="btnSave" class="btn btn-primary" type="button">Save</button>
+                <a href="/board" class="btn btn-primary">List</a>
+            </div>
+        </div>
+    </main>
+    <% include ./partials/footer.ejs %>
+</body>
+<script>
+    $(function() {
+        //Save click event
+        document.getElementById("btnSave").addEventListener('click', function() {
+            var form = document.getElementById("frm");
+            var selMaster = document.getElementById("selMaster");
+            $("#masterSeq").val(selMaster.options[selMaster.selectedIndex].value);
+            form.submit();
+        });
+    });
+</script>
+
+</html>

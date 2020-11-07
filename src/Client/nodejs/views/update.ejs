@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="kr">
+<% include ./partials/head.ejs %>
+
+<body>
+    <% include ./partials/header.ejs %>
+    <main role="main">
+        <% include ./partials/mainHeader.ejs %>
+        <div class="starter-template">
+            <div class="container text-left">
+                <form id="frm" method="post" action="/board/update">
+                    <input type="hidden" name="boardSeq" value="<%= view.single.boardSeq%>" />
+                    <input type="hidden" id="masterSeq" name="masterSeq" value="" />
+                    <div class="form-group">
+                        <label for="selMaster">게시판 종류</label>
+                        <select class="form-control" id="selMaster">
+                        <% for( var i=0; i<category.list.length; i++) {%>
+                            <option value="<%=category.list[i].masterSeq%>" <%=view.single.masterSeq===category.list[i].masterSeq ? 'selected' : ''%>><%=category.list[i].boardName%></option>
+                        <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ipTitle">제목</label>
+                        <input type="text" class="form-control" id="ipTitle" name="ipTitle" placeholder="제목을 입력하세요." value="<%= view.single.title%>" />
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="txaContent" name="txaContent" rows="10"><%- view.single.content%></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="container text-right">
+                <% if (view.single.userId === _g.session.userid) { %>
+                <button id="btnSave" class="btn btn-primary" type="button">Save</button>
+                <% } %>
+                <a href="/board" class="btn btn-primary">List</a>
+            </div>
+        </div>
+    </main>
+    <% include ./partials/footer.ejs %>
+</body>
+<script>
+    $(function() {
+        //Save click event
+        document.getElementById("btnSave").addEventListener('click', function() {
+            var form = document.getElementById("frm");
+            var selMaster = document.getElementById("selMaster");
+            $("#masterSeq").val(selMaster.options[selMaster.selectedIndex].value);
+            form.submit();
+        });
+    });
+</script>
+
+</html>
