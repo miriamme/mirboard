@@ -62,11 +62,8 @@ router.post('/login', function(req, res) {
     var returnUrl = req.query.returnurl ? req.query.returnurl : "";
     var reqData = {
         userid: req.body.userid,
-        password: req.body.password
+        password: auth.encryptPassword(req.body.password)
     };
-
-    //password 암호화
-    reqData.password = auth.encryptPassword(reqData.password);
 
     server.apiCall(config.endPoint.login, "POST", reqData, function(data) {
         if (data.resultCode === 0) {
